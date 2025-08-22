@@ -1,19 +1,30 @@
-<div class="wrap">
-	<h1>LinkedIn Analytics</h1>
-	<div *ngIf="loading">Loading…</div>
-	<div *ngIf="error" class="error">{{ error }}</div>
-	<div class="grid" *ngIf="!loading && !error">
-		<section>
-			<h2>Page Views</h2>
+<div class="json-wrap" *ngIf="!loading; else loadingTpl">
+	<div *ngIf="!error; else errorTpl">
+		<div class="json-card">
+			<div class="json-card__header">
+				<h3>Page Views</h3>
+			</div>
 			<pre>{{ pageViews | json }}</pre>
-		</section>
-		<section>
-			<h2>Followers</h2>
+		</div>
+		<div class="json-card">
+			<div class="json-card__header">
+				<h3>Followers</h3>
+			</div>
 			<pre>{{ followers | json }}</pre>
-		</section>
-		<section>
-			<h2>Engagement</h2>
+		</div>
+		<div class="json-card">
+			<div class="json-card__header">
+				<h3>Engagement</h3>
+			</div>
 			<pre>{{ engagement | json }}</pre>
-		</section>
+		</div>
 	</div>
 </div>
+
+<ng-template #loadingTpl>
+	<div class="json-loading">Loading…</div>
+</ng-template>
+
+<ng-template #errorTpl>
+	<div class="json-error">{{ error }}</div>
+</ng-template>
