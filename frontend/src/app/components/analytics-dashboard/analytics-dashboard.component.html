@@ -1,0 +1,19 @@
+<div class="wrap">
+	<h1>LinkedIn Analytics</h1>
+	<div *ngIf="loading">Loading…</div>
+	<div *ngIf="error" class="error">{{ error }}</div>
+	<div class="grid" *ngIf="!loading && !error">
+		<section>
+			<h2>Page Views</h2>
+			<pre>{{ pageViews | json }}</pre>
+		</section>
+		<section>
+			<h2>Followers</h2>
+			<pre>{{ followers | json }}</pre>
+		</section>
+		<section>
+			<h2>Engagement</h2>
+			<pre>{{ engagement | json }}</pre>
+		</section>
+	</div>
+</div>

@@ -1,0 +1,6 @@
+@Toolidol.Api_HostAddress = http://localhost:5116
+
+GET {{Toolidol.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

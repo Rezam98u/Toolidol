@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Toolidol.Api.props" />
+</Project>
