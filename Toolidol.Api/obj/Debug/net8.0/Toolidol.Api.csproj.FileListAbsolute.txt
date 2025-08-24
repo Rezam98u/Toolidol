@@ -31,3 +31,4 @@ E:\Web pack\Toolidol\Toolidol\Toolidol.Api\obj\Debug\net8.0\refint\Toolidol.Api.
 E:\Web pack\Toolidol\Toolidol\Toolidol.Api\obj\Debug\net8.0\Toolidol.Api.pdb
 E:\Web pack\Toolidol\Toolidol\Toolidol.Api\obj\Debug\net8.0\Toolidol.Api.genruntimeconfig.cache
 E:\Web pack\Toolidol\Toolidol\Toolidol.Api\obj\Debug\net8.0\ref\Toolidol.Api.dll
+E:\Web pack\Toolidol\Toolidol\Toolidol.Api\obj\Debug\net8.0\Toolidol.Api.sourcelink.json
