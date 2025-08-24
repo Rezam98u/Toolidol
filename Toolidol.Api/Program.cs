@@ -1,9 +1,10 @@
 using Toolidol.Api.Services;
+using Toolidol.Api.Options;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -15,6 +16,9 @@ builder.Services.AddHttpClient();
 builder.Services.AddScoped<HttpService>();
 builder.Services.AddScoped<ILinkedInOrganizationService, LinkedInOrganizationService>();
 builder.Services.AddScoped<ILinkedInAnalyticsService, LinkedInAnalyticsService>();
+
+// Options binding
+builder.Services.Configure<LinkedInOptions>(builder.Configuration.GetSection("LinkedIn"));
 
 var app = builder.Build();
 

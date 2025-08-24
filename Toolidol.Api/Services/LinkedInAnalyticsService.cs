@@ -1,4 +1,6 @@
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
+using Toolidol.Api.Options;
 using Toolidol.Api.Models.DTOs.LinkedInAnalytics;
 
 namespace Toolidol.Api.Services
@@ -8,12 +10,14 @@ namespace Toolidol.Api.Services
 		private readonly HttpService _httpService;
 		private readonly ILinkedInOrganizationService _orgService;
 		private readonly IConfiguration _configuration;
+		private readonly IOptions<LinkedInOptions> _options;
 
-		public LinkedInAnalyticsService(HttpService httpService, ILinkedInOrganizationService orgService, IConfiguration configuration)
+		public LinkedInAnalyticsService(HttpService httpService, ILinkedInOrganizationService orgService, IConfiguration configuration, IOptions<LinkedInOptions> options)
 		{
 			_httpService = httpService;
 			_orgService = orgService;
 			_configuration = configuration;
+			_options = options;
 		}
 
 		public async Task<OrganizationPageViewsResponse?> GetPageViewsAsync(CancellationToken cancellationToken = default)
@@ -93,7 +97,7 @@ namespace Toolidol.Api.Services
 
 		private bool IsMock()
 		{
-			return string.Equals(_configuration["LinkedIn:Mock"], "true", StringComparison.OrdinalIgnoreCase);
+			return _options.Value.Mock;
 		}
 	}
 }

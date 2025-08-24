@@ -2,6 +2,8 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
+using Toolidol.Api.Options;
 
 namespace Toolidol.Api.Services
 {
@@ -9,17 +11,19 @@ namespace Toolidol.Api.Services
 	{
 		private readonly IHttpClientFactory _httpClientFactory;
 		private readonly IConfiguration _configuration;
+		private readonly IOptions<LinkedInOptions> _linkedInOptions;
 
-		public HttpService(IHttpClientFactory httpClientFactory, IConfiguration configuration)
+		public HttpService(IHttpClientFactory httpClientFactory, IConfiguration configuration, IOptions<LinkedInOptions> linkedInOptions)
 		{
 			_httpClientFactory = httpClientFactory;
 			_configuration = configuration;
+			_linkedInOptions = linkedInOptions;
 		}
 
 		public async Task<T?> GetFromLinkedInApiAsync<T>(string relativePath, string accessToken, IDictionary<string, string>? queryParameters = null, CancellationToken cancellationToken = default)
 		{
 			var client = _httpClientFactory.CreateClient();
-			var baseUrl = _configuration["LinkedIn:ApiBaseUrl"] ?? "https://api.linkedin.com/v2";
+			var baseUrl = _linkedInOptions.Value.ApiBaseUrl;
 			var baseUri = new Uri(new Uri(baseUrl.TrimEnd('/') + "/"), relativePath.TrimStart('/'));
 			var queryParams = new Dictionary<string, string?>();
 			if (queryParameters != null)

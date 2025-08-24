@@ -2,8 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace Toolidol.Api.Models.DTOs.LinkedInAnalytics
 {
-	// LinkedIn org follower statistics (aggregations by time and total)
-	public class FollowersResponse
+		public class FollowersResponse
 	{
 		[JsonPropertyName("elements")]
 		public List<FollowersElement> Elements { get; set; } = new();
