@@ -145,35 +145,7 @@ if (IsMock()) {
 3. **Chart Updates**: Processes raw data for visualization
 4. **Loading State**: Sets `loading = false`
 
-### 5. UI Rendering Process
-
-#### Step 1: KPI Cards Display
-Template processes data through helper methods:
-```typescript
-// Page Views Card
-{{ formatNumber(getPageViews()) }}        // this.analyticsData.pageViews.elements[0].pageViews
-{{ formatNumber(getUniqueVisitors()) }}   // this.analyticsData.pageViews.elements[0].uniquePageViews
-
-// Followers Card  
-{{ formatNumber(getTotalFollowers()) }}   // this.analyticsData.followers.elements[0].followerCounts
-+{{ getFollowersGained() }}              // this.analyticsData.followers.elements[0].followerGains
--{{ getFollowersLost() }}                // this.analyticsData.followers.elements[0].followerLosses
-
-// Engagement Card
-{{ formatPercentage(getEngagementRate()) }} // this.analyticsData.engagement.elements[0].totalShareStatistics.engagement
-{{ formatNumber(getImpressions()) }}        // this.analyticsData.engagement.elements[0].totalShareStatistics.impressionCount
-```
-
-#### Step 2: Chart Visualization (Prepared but not rendered)
-The component prepares chart configurations:
-- **Follower Growth**: Line chart with time series data
-- **Engagement Metrics**: Bar chart with impressions, clicks, likes, etc.
-- **Engagement Breakdown**: Doughnut chart for engagement distribution
-
-#### Step 3: Raw Data Display
-Shows formatted JSON of all API responses for debugging/transparency
-
-### 6. Error Handling Flow
+### 5. Error Handling Flow
 
 #### Backend Error Handling
 1. **HTTP Policies**: Automatic retry on transient failures
@@ -189,7 +161,7 @@ error: (e) => {
 - Shows error card with retry button
 - User can click "Retry" to reload data
 
-### 7. Configuration Management
+### 6. Configuration Management
 
 #### LinkedIn Settings (`appsettings.json`)
 ```json
@@ -207,7 +179,7 @@ error: (e) => {
 - **Development**: Mock mode enabled, detailed logging
 - **Production**: Real LinkedIn API integration required
 
-### 8. Key Features
+### 7. Key Features
 
 #### Resilience Patterns
 - **Retry with Exponential Backoff**: Handles temporary API failures
