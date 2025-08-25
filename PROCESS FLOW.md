@@ -145,23 +145,7 @@ if (IsMock()) {
 3. **Chart Updates**: Processes raw data for visualization
 4. **Loading State**: Sets `loading = false`
 
-### 5. Error Handling Flow
-
-#### Backend Error Handling
-1. **HTTP Policies**: Automatic retry on transient failures
-2. **Circuit Breaker**: Prevents cascading failures
-3. **Exception Propagation**: Unhandled errors become HTTP 500 responses
-
-#### Frontend Error Handling
-```typescript
-error: (e) => {
-  this.error = e?.message ?? 'Failed to load analytics';
-}
-```
-- Shows error card with retry button
-- User can click "Retry" to reload data
-
-### 6. Configuration Management
+### 5. Configuration Management
 
 #### LinkedIn Settings (`appsettings.json`)
 ```json
@@ -179,7 +163,7 @@ error: (e) => {
 - **Development**: Mock mode enabled, detailed logging
 - **Production**: Real LinkedIn API integration required
 
-### 7. Key Features
+### 6. Key Features
 
 #### Resilience Patterns
 - **Retry with Exponential Backoff**: Handles temporary API failures
@@ -192,11 +176,6 @@ error: (e) => {
 - **Error Recovery**: Retry functionality for failed requests
 - **Responsive Design**: Works on mobile and desktop
 - **Dark Theme Support**: Theme toggle capability
-
-#### Data Visualization Ready
-- Chart.js integration prepared
-- Multiple chart types configured
-- Real-time data binding
 
 ## Development Workflow
 
