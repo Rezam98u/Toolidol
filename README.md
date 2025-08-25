@@ -156,14 +156,6 @@ if (IsMock()) {
 // In production: calls real LinkedIn API
 ```
 
-### 6. **Frontend Displays Results**
-```html
-<mat-card class="kpi-card">
-  <span class="kpi-number">{{ formatNumber(getPageViews()) }}</span>
-  <!-- Shows: 123 (from mock data) -->
-</mat-card>
-```
-
 ## ⚙️ Configuration
 
 ### Current Settings (`Toolidol.Api/appsettings.json`)
