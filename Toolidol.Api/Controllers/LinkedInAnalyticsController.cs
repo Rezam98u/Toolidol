@@ -17,43 +17,22 @@ namespace Toolidol.Api.Controllers
 		[HttpGet("page-views")]
 		public async Task<IActionResult> GetPageViews(CancellationToken cancellationToken)
 		{
-			try
-			{
-				var result = await _analyticsService.GetPageViewsAsync(cancellationToken);
-				return Ok(result);
-			}
-			catch (Exception ex)
-			{
-				return BadRequest(new { error = ex.Message });
-			}
+			var result = await _analyticsService.GetPageViewsAsync(cancellationToken);
+			return Ok(result);
 		}
 
 		[HttpGet("followers")]
 		public async Task<IActionResult> GetFollowers(CancellationToken cancellationToken)
 		{
-			try
-			{
-				var result = await _analyticsService.GetFollowersAsync(cancellationToken);
-				return Ok(result);
-			}
-			catch (Exception ex)
-			{
-				return BadRequest(new { error = ex.Message });
-			}
+			var result = await _analyticsService.GetFollowersAsync(cancellationToken);
+			return Ok(result);
 		}
 
 		[HttpGet("engagement")]
 		public async Task<IActionResult> GetEngagement(CancellationToken cancellationToken)
 		{
-			try
-			{
-				var result = await _analyticsService.GetEngagementAsync(cancellationToken);
-				return Ok(result);
-			}
-			catch (Exception ex)
-			{
-				return BadRequest(new { error = ex.Message });
-			}
+			var result = await _analyticsService.GetEngagementAsync(cancellationToken);
+			return Ok(result);
 		}
 	}
 }

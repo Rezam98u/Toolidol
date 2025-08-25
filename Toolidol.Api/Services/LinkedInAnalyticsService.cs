@@ -34,6 +34,10 @@ namespace Toolidol.Api.Services
 			}
 			var token = await _orgService.GetAccessTokenAsync(cancellationToken);
 			var orgUrn = await _orgService.GetOrganizationUrnAsync(cancellationToken);
+			if (string.IsNullOrWhiteSpace(token) || string.IsNullOrWhiteSpace(orgUrn))
+			{
+				throw new InvalidOperationException("LinkedIn access token or organization is missing");
+			}
 			// LinkedIn Organization page views (example endpoint placeholder)
 			var path = "organizationPageStatistics";
 			var query = new Dictionary<string, string>
@@ -58,6 +62,10 @@ namespace Toolidol.Api.Services
 			}
 			var token = await _orgService.GetAccessTokenAsync(cancellationToken);
 			var orgUrn = await _orgService.GetOrganizationUrnAsync(cancellationToken);
+			if (string.IsNullOrWhiteSpace(token) || string.IsNullOrWhiteSpace(orgUrn))
+			{
+				throw new InvalidOperationException("LinkedIn access token or organization is missing");
+			}
 			var path = "organizationFollowerStatistics";
 			var query = new Dictionary<string, string>
 			{
@@ -86,6 +94,10 @@ namespace Toolidol.Api.Services
 			}
 			var token = await _orgService.GetAccessTokenAsync(cancellationToken);
 			var orgUrn = await _orgService.GetOrganizationUrnAsync(cancellationToken);
+			if (string.IsNullOrWhiteSpace(token) || string.IsNullOrWhiteSpace(orgUrn))
+			{
+				throw new InvalidOperationException("LinkedIn access token or organization is missing");
+			}
 			var path = "organizationalEntityShareStatistics";
 			var query = new Dictionary<string, string>
 			{

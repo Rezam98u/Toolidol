@@ -1,30 +1,135 @@
-<div class="json-wrap" *ngIf="!loading; else loadingTpl">
-	<div *ngIf="!error; else errorTpl">
-		<div class="json-card">
-			<div class="json-card__header">
-				<h3>Page Views</h3>
-			</div>
-			<pre>{{ pageViews | json }}</pre>
-		</div>
-		<div class="json-card">
-			<div class="json-card__header">
-				<h3>Followers</h3>
-			</div>
-			<pre>{{ followers | json }}</pre>
-		</div>
-		<div class="json-card">
-			<div class="json-card__header">
-				<h3>Engagement</h3>
-			</div>
-			<pre>{{ engagement | json }}</pre>
-		</div>
-	</div>
+<div class="dashboard-container" [class.dark-theme]="isDarkTheme">
+  <!-- Header -->
+  <div class="dashboard-header">
+    <div class="header-content">
+      <h1 class="dashboard-title">
+        LinkedIn Analytics Dashboard
+      </h1>
+      <div class="header-controls">
+        <mat-form-field appearance="outline" class="date-filter">
+          <mat-label>Date Range</mat-label>
+          <mat-select [(ngModel)]="selectedDateRange" (selectionChange)="onDateRangeChange()">
+            <mat-option *ngFor="let range of dateRanges" [value]="range.days">
+              {{ range.label }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-container">
+    <div class="loading-skeleton">
+      <div class="skeleton-card" *ngFor="let item of [1,2,3]">
+        <div class="skeleton-header"></div>
+        <div class="skeleton-content">
+          <div class="skeleton-number"></div>
+          <div class="skeleton-text"></div>
+        </div>
+      </div>
+    </div>
+    <mat-spinner diameter="40"></mat-spinner>
+    <p>Loading analytics data...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error && !loading" class="error-container">
+    <mat-card class="error-card">
+      <mat-card-content>
+        <mat-icon class="error-icon">error_outline</mat-icon>
+        <h2>Failed to Load Analytics</h2>
+        <p>{{ error }}</p>
+        <button mat-raised-button color="primary" (click)="retry()">
+          <mat-icon>refresh</mat-icon>
+          Retry
+        </button>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Analytics Content -->
+  <div *ngIf="!loading && !error && analyticsData" class="analytics-content">
+    <!-- KPI Cards -->
+    <div class="kpi-grid">
+      <!-- Page Views Card -->
+      <mat-card class="kpi-card page-views-card">
+        <mat-card-content>
+          <div class="kpi-header">
+            <h3>Page Views</h3>
+          </div>
+          <div class="kpi-main">
+            <span class="kpi-number">{{ formatNumber(getPageViews()) }}</span>
+          </div>
+          <div class="kpi-secondary">
+            <span class="kpi-label">Unique Visitors</span>
+            <span class="kpi-value">{{ formatNumber(getUniqueVisitors()) }}</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Followers Card -->
+      <mat-card class="kpi-card followers-card">
+        <mat-card-content>
+          <div class="kpi-header">
+            <h3>Followers</h3>
+          </div>
+          <div class="kpi-main">
+            <span class="kpi-number">{{ formatNumber(getTotalFollowers()) }}</span>
+          </div>
+          <div class="kpi-secondary">
+            <span class="kpi-label">Net Growth</span>
+            <span class="kpi-value">
+              <span class="positive">+{{ getFollowersGained() }}</span>
+              <span class="negative">-{{ getFollowersLost() }}</span>
+            </span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Engagement Card -->
+      <mat-card class="kpi-card engagement-card">
+        <mat-card-content>
+          <div class="kpi-header">
+            <h3>Engagement Rate</h3>
+          </div>
+          <div class="kpi-main">
+            <span class="kpi-number">{{ formatPercentage(getEngagementRate()) }}</span>
+          </div>
+          <div class="kpi-secondary">
+            <span class="kpi-label">Impressions</span>
+            <span class="kpi-value">{{ formatNumber(getImpressions()) }}</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+
+    <!-- Raw Data Section -->
+    <div class="raw-data-section">
+      <mat-card class="raw-data-card">
+        <mat-card-header>
+          <mat-card-title>
+            Raw API Data
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="data-tabs">
+            <div class="tab-content">
+              <h4>Page Views</h4>
+              <pre>{{ analyticsData.pageViews | json }}</pre>
+            </div>
+            <div class="tab-content">
+              <h4>Followers</h4>
+              <pre>{{ analyticsData.followers | json }}</pre>
+            </div>
+            <div class="tab-content">
+              <h4>Engagement</h4>
+              <pre>{{ analyticsData.engagement | json }}</pre>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
 </div>
-
-<ng-template #loadingTpl>
-	<div class="json-loading">Loading…</div>
-</ng-template>
-
-<ng-template #errorTpl>
-	<div class="json-error">{{ error }}</div>
-</ng-template>
