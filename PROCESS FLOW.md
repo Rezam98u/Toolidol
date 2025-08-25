@@ -163,19 +163,6 @@ if (IsMock()) {
 - **Development**: Mock mode enabled, detailed logging
 - **Production**: Real LinkedIn API integration required
 
-### 6. Key Features
-
-#### Resilience Patterns
-- **Retry with Exponential Backoff**: Handles temporary API failures
-- **Circuit Breaker**: Protects against cascade failures
-- **Rate Limit Handling**: Respects LinkedIn API limits
-- **Request Logging**: Full HTTP request/response tracking
-
-#### User Experience
-- **Loading States**: Skeleton screens and spinners
-- **Error Recovery**: Retry functionality for failed requests
-- **Responsive Design**: Works on mobile and desktop
-- **Dark Theme Support**: Theme toggle capability
 
 ## Development Workflow
 
