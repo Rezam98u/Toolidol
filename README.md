@@ -1,6 +1,6 @@
 # 📊 LinkedIn Analytics Dashboard
 
-A modern full-stack application for visualizing LinkedIn organization analytics data. Built with ASP.NET Core Web API and Angular 18, featuring real-time data visualization, responsive design, and robust error handling.
+A full-stack application for visualizing LinkedIn organization analytics data. Built with ASP.NET Core Web API and Angular 18, featuring real-time data visualization, responsive design, and robust error handling.
 
 ## ✨ Features
 
